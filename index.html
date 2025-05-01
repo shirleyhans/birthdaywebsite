@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday my love! 🎉❤️</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap');
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+    overflow-x: hidden;
+    color: #4a3c8c;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+  }
+  h1 {
+    font-family: 'Pacifico', cursive;
+    margin: 1rem 0;
+    font-size: 3rem;
+    color: #7b3fb3;
+    text-shadow: 2px 2px 5px #fff6ffcc;
+    user-select: none;
+  }
+
+  /* Cake animation container */
+  .cake-container {
+    position: relative;
+    width: 180px;
+    height: 220px;
+    margin: 2rem 0 3rem 0;
+    cursor: default;
+  }
+
+  /* Cake base */
+  .cake {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 140px;
+    height: 120px;
+    background: #ffd6e8;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 10px 20px #d688b4cc;
+    transform: translateX(-50%);
+    overflow: visible;
+  }
+  /* Cake tiers */
+  .tier1 {
+    position: relative;
+    width: 140px;
+    height: 70px;
+    background: #ffc0d9;
+    border-radius: 30px 30px 0 0;
+    box-shadow: inset 0 4px 8px #d786b1;
+  }
+  .tier2 {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    width: 100px;
+    height: 60px;
+    background: #ffb6cc;
+    border-radius: 50% 50% 15% 15% / 70% 70% 30% 30%;
+    box-shadow: inset 0 3px 5px #d47ca6;
+    transform: translateX(-50%);
+  }
+
+  /* Candle base */
+  .candles {
+    position: absolute;
+    top: -95px;
+    left: 50%;
+    width: 130px;
+    height: 40px;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-around;
+  }
+  .candle {
+    position: relative;
+    width: 10px;
+    height: 40px;
+    background: #ffe3ee;
+    border-radius: 3px;
+    box-shadow: inset 0 2px 4px #d48cab;
+  }
+  /* Candle flame */
+  .flame {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    width: 12px;
+    height: 18px;
+    background: radial-gradient(circle at 50% 50%, #ffec3d, #ff6e2e);
+    border-radius: 50% 50% 50% 50% / 75% 75% 25% 25%;
+    transform: translateX(-50%);
+    animation: flicker 1.2s infinite alternate ease-in-out;
+    filter: drop-shadow(0 0 3px #ff9c3d);
+  }
+  @keyframes flicker {
+    0% { transform: translateX(-50%) scaleY(1); opacity: 1;  filter: drop-shadow(0 0 4px #ff9c3d); }
+    100% { transform: translateX(calc(-50% + 0.8px)) scaleY(1.1); opacity: 0.85; filter: drop-shadow(0 0 6px #ffbc6a);}
+  }
+
+  /* Party confetti animation */
+  .confetti-piece {
+    position: fixed;
+    width: 8px;
+    height: 14px;
+    background-color: #ff6f91;
+    opacity: 0.9;
+    border-radius: 2px;
+    transform-origin: center;
+    animation-timing-function: linear;
+    pointer-events: none;
+    z-index: 1000;
+  }
+  .confetti-piece:nth-child(2n) {
+    background-color: #fdd835;
+  }
+  .confetti-piece:nth-child(3n) {
+    background-color: #64b5f6;
+  }
+  .confetti-piece:nth-child(4n) {
+    background-color: #ba68c8;
+  }
+  @keyframes confetti-fall {
+    0% {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(100vh) rotate(360deg);
+    }
+  }
+
+  /* Carousel Container */
+  .carousel-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 3rem auto 2rem auto;
+    background: #ffffffdd;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px #a67cca88;
+    padding: 1.5rem;
+  }
+  .carousel-title {
+    font-family: 'Pacifico', cursive;
+    color: #c94f94;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .carousel {
+    position: relative;
+    overflow: hidden;
+    height: 120px;
+  }
+  .carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  .carousel-item {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    color: #6a3f79;
+  }
+  /* Carousel buttons */
+  .carousel-button {
+    background: #c861a3;
+    color: #fff;
+    border: none;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 0 1rem;
+    font-weight: bold;
+    box-shadow: 0 3px 6px #b6488e;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .carousel-button:hover {
+    background: #b04e85;
+  }
+  .carousel-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  /* Quiz Section */
+  .quiz-container {
+    width: 90%;
+    max-width: 600px;
+    background: #fef0f6cc;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 10px #bb6699aa;
+    margin: 3rem auto;
+    color: #663366;
+    text-align: center;
+  }
+  .quiz-container h2 {
+    font-family: 'Pacifico', cursive;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+  .quiz-question {
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+  .quiz-options {
+   margin-top: 1.5rem;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 1rem;
+  }
+  .quiz-option {
+    background: #d394b4;
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 3px 6px #b36292;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .quiz-option:hover {
+    background: #a54f78;
+  }
+  .quiz-result {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    min-height: 2em;
+  }
+
+  /* Locker Section */
+  .locker-container {
+    width: 90%;
+    max-width: 600px;
+    background: #f0e2fcdd;
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 3rem auto;
+    box-shadow: 0 4px 10px #7c55ccaa;
+    text-align: center;
+    color: #4e3399;
+  }
+  .locker-container h2 {
+    font-family: 'Pacifico', cursive;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+  }
+  .locker {
+    width: 250px;
+    margin: 1rem auto 1.5rem auto;
+    padding: 10px;
+    border: 3px solid #9350b8;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    letter-spacing: 12px;
+    text-align: center;
+    background: #e9dcffcc;
+    color: #6b42a2;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+  }
+  .locker:focus {
+    border-color: #a261ef;
+  }
+  .locker-button {
+    background: #9350b8;
+    border: none;
+    color: white;
+    padding: 0.6rem 2rem;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 3px 6px #7a3ea1;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .locker-button:hover {
+    background: #7a3ea1;
+  }
+  .locker-message {
+    margin-top: 1rem;
+    font-weight: 700;
+    min-height: 1.5em;
+  }
+  .special-video {
+    margin-top: 1.5rem;
+    border-radius: 15px;
+    max-width: 100%;
+    display: none;
+    box-shadow: 0 5px 15px #a45fcccc;
+  }
+
+  /* Gift box surprise animation container */
+  .gift-container {
+    position: relative;
+    width: 120px;
+    height: 140px;
+    margin: 2rem auto 2.5rem auto;
+    cursor: pointer;
+  }
+  /* Gift box base */
+  .gift-box {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: #f06292;
+    border-radius: 20px;
+    box-shadow: 0 8px 12px #bf4a7e;
+    top: 20px;
+  }
+  /* Gift Ribbon vertical */
+  .ribbon-vertical {
+    position: absolute;
+    width: 20px;
+    height: 120px;
+    background: #fff1f6;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px #ffd9e0;
+  }
+  /* Gift Ribbon horizontal */
+  .ribbon-horizontal {
+    position: absolute;
+    width: 120px;
+    height: 20px;
+    background: #fff1f6;
+    top: 70px;
+    left: 0;
+    border-radius: 12px;
+    box-shadow: inset 0 0 10px #ffd9e0;
+  }
+  /* Gift bow */
+  .gift-bow {
+    position: absolute;
+    width: 80px;
+    height: 30px;
+    background: #f06292;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 40% 40% 50% 50% / 100% 100% 0 0;
+    box-shadow: 0 4px 8px #bf4a7e;
+    overflow: visible;
+  }
+  .gift-bow::before,
+  .gift-bow::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    background: #f06292;
+    border-radius: 50% 50% 50% 50% / 100% 100% 0 0;
+    box-shadow: 0 4px 8px #bf4a7e;
+    transform-origin: bottom center;
+  }
+  .gift-bow::before {
+    left: -26px;
+    transform: rotate(-45deg);
+  }
+  .gift-bow::after {
+    right: -26px;
+    transform: rotate(45deg);
+  }
+  /* Gift box open animation */
+  .open .gift-box {
+    animation: openBox 1s forwards;
+    transform-origin: top center;
+  }
+  .open .gift-bow {
+    animation: bowBounce 1s forwards;
+  }
+  .open .ribbon-vertical {
+    animation: ribbonFade 1s forwards;
+  }
+  .open .ribbon-horizontal {
+    animation: ribbonFade 1s forwards;
+  }
+  @keyframes openBox {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-60px) rotate(15deg); }
+    100% { transform: translateY(-60px) rotate(15deg); }
+  }
+  @keyframes bowBounce {
+    0% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+    100% { transform: translateX(-50%) translateY(0); }
+  }
+  @keyframes ribbonFade {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  /* Surprise sparkle */
+  .sparkle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle at center, #fffefe 70%, transparent 80%);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 5px #ffe6f0);
+    box-shadow: 0 0 8px #ff8db2;
+    animation: sparkleAnim 2s infinite ease-in-out;
+    opacity: 0;
+  }
+  .sparkle:nth-child(1) {
+    top: 10px;
+    left: 25px;
+    animation-delay: 0s;
+  }
+  .sparkle:nth-child(2) {
+    top: 40px;
+    left: 90px;
+    animation-delay: 0.7s;
+  }
+  .sparkle:nth-child(3) {
+    top: 80px;
+    left: 60px;
+    animation-delay: 1.3s;
+  }
+  @keyframes sparkleAnim {
+    0%, 100% { opacity: 0; transform: scale(0.7); }
+    50% { opacity: 1; transform: scale(1.4); }
+  }
+
+  /* Click Me Button */
+  .click-me-button {
+    background: #ff69b4;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.8rem;
+    border-radius: 40px;
+    color: white;
+    font-family: 'Pacifico', cursive;
+    cursor: pointer;
+    box-shadow: 0 5px 10px #d14d8f;
+    user-select: none;
+    transition: transform 0.2s ease;
+    margin-bottom: 1rem;
+  }
+  .click-me-button:hover {
+    background: #d14d8f;
+    transform: scale(1.08);
+  }
+</style>
+</head>
+<body>
+  <h1>Happy Birthday my love! 🎉💜</h1>
+
+  <!-- Cake animation -->
+  <div class="cake-container" aria-label="Animated birthday cake">
+    <div class="cake">
+      <div class="tier1"></div>
+      <div class="tier2"></div>
+      <div class="candles" aria-label="Birthday candles">
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame" style="animation-delay: 0.4s;"></div></div>
+        <div class="candle"><div class="flame" style="animation-delay: 0.8s;"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Party Confetti -->
+  <div id="confetti-container"></div>
+
+  <!-- Carousel of 18 reasons -->
+  <section class="carousel-container" aria-label="Carousel of 18 reasons why I love you in long distance theme">
+    <h2 class="carousel-title">18 Reasons Why I Love You ❤️ (Long Distance)</h2>
+    <div class="carousel" role="list" aria-live="polite" aria-atomic="true">
+      <div class="carousel-inner" id="carouselInner">
+        <!-- Carousel items will be inserted by JS -->
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-button" id="prevBtn" aria-label="Previous reason">&lt; Prev</button>
+      <button class="carousel-button" id="nextBtn" aria-label="Next reason">Next &gt;</button>
+    </div>
+  </section>
+
+  <!-- Do you love me quiz -->
+  <section class="quiz-container" aria-label="Do you love me quiz">
+    <h2>Do You Love Me? 💕</h2>
+    <div class="quiz-question">Choose your answer:</div>
+    <div class="quiz-options" role="list" id="quizOptions" aria-live="polite" aria-atomic="true">
+      <!-- Quiz options inserted by JS -->
+    </div>
+    <div class="quiz-result" id="quizResult" aria-live="polite"></div>
+  </section>
+
+  <!-- Locker password for special video -->
+  <section class="locker-container" aria-label="Special video unlocker with password locker animation">
+  <h2>Special Birthday Video 🎥</h2>
+
+  <input
+    type="password"
+    id="lockerInput"
+    class="locker"
+    maxlength="8"
+    placeholder="Enter password"
+    aria-label="Enter password to unlock special video"
+  />
+
+  <button class="locker-button" id="unlockBtn" aria-label="Unlock special video">
+    Unlock
+  </button>
+
+  <div class="locker-message" id="lockerMessage" role="alert"></div>
+
+  <!-- Hidden Vimeo iframe until unlocked -->
+  <div id="videoContainer" style="display: none; margin-top: 20px;">
+    <iframe
+      title="vimeo-player"
+      src="https://player.vimeo.com/video/1080476625?h=f6dcd8205d"
+      width="640"
+      height="360"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </div>
+</section>
+
+  <!-- Click Me Button to trigger gift -->
+  <button class="click-me-button" id="clickMeBtn" aria-label="Click me to open your gift!">Click Me! 🎁</button>
+
+  <!-- Gift surprise animation -->
+  <div class="gift-container" id="giftContainer" aria-label="Birthday gift surprise box" role="button" tabindex="0" title="Click to open your surprise!">
+    <div class="gift-box"></div>
+    <div class="ribbon-vertical"></div>
+    <div class="ribbon-horizontal"></div>
+    <div class="gift-bow"></div>
+    <!-- sparkles -->
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+  </div>
+
+  <script>
+  // Confetti generator
+  const confettiContainer = document.getElementById('confetti-container');
+
+  function createConfettiPiece() {
+    const confetti = document.createElement('div');
+    confetti.classList.add('confetti-piece');
+    confetti.style.left = Math.random() * window.innerWidth + 'px';
+    confetti.style.top = '-20px';
+    confetti.style.width = (6 + Math.random() * 6) + 'px';
+    confetti.style.height = (10 + Math.random() * 10) + 'px';
+    confetti.style.backgroundColor = ['#ff6f91', '#fdd835', '#64b5f6', '#ba68c8'][Math.floor(Math.random() * 4)];
+    confetti.style.animation = `confetti-fall ${(4 + Math.random() * 6).toFixed(2)}s linear forwards`;
+    confetti.style.transform = `rotate(${Math.random()*360}deg)`;
+    confettiContainer.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 10000);
+  }
+  setInterval(createConfettiPiece, 200);
+
+  // Carousel content
+  const reasons = [
+    "You make every call feel like a warm hug.",
+    "Your texts brighten my loneliest days.",
+    "Our midnight talks are my favorite time.",
+    "You’re worth every mile between us.",
+    "I love how we dream of the future together.",
+    "You’re my constant in this distance.",
+    "Your laughter is my favorite song.",
+    "I cherish every photo you send me.",
+    "The way you say goodnight means the world.",
+    "You make the distance feel small.",
+    "Your voice is my favorite comfort.",
+    "I love how you support my dreams from afar.",
+    "Every message from you is a treasure.",
+    "You’re my sunshine on cloudy days.",
+    "I’m proud to love you across the miles.",
+    "You’re my best friend and my love.",
+    "I can’t wait to be in your arms again.",
+    "Distance only makes me love you more."
+  ];
+  const carouselInner = document.getElementById('carouselInner');
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    if (index < 0) index = reasons.length - 1;
+    else if (index >= reasons.length) index = 0;
+    currentSlide = index;
+    carouselInner.style.transform = `translateX(${-100 * currentSlide}%)`;
+  }
+
+  // Create carousel items
+  for (let reason of reasons) {
+    const item = document.createElement('div');
+    item.className = 'carousel-item';
+    item.textContent = reason;
+    carouselInner.appendChild(item);
+  }
+  showSlide(0);
+
+  // Carousel navigation
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    showSlide(currentSlide - 1);
+  });
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    showSlide(currentSlide + 1);
+  });
+
+  // Quiz part
+  const quizOptionsData = [
+    { text: "Yes, a million times! 💖", isAnswer: true },
+    { text: "Of course! You're my star. ⭐", isAnswer: true },
+    { text: "Maybe… if you bring snacks 🍪", isAnswer: false },
+    { text: "Only if you promise to call! 📞", isAnswer: false },
+    { text: "No, or else… 😈", isAnswer: 'threat' },
+  ];
+  const quizOptionsContainer = document.getElementById('quizOptions');
+  const quizResult = document.getElementById('quizResult');
+
+  quizOptionsData.forEach((option) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.textContent = option.text;
+    btn.addEventListener('click', () => {
+      if (option.isAnswer === true) {
+        quizResult.textContent = "Aww! I love you too! ❤️😊";
+      } else if (option.isAnswer === false) {
+        quizResult.textContent = "Hmm... I'll take that as a maybe! 😘";
+      } else if (option.isAnswer === 'threat') {
+        quizResult.textContent = "Oh no! 😅 I'll beware!";
+      }
+    });
+    quizOptionsContainer.appendChild(btn);
+  });
+
+  // Locker password animation and special video reveal
+ document.getElementById('unlockBtn').addEventListener('click', function () {
+    const correctPassword = "15042025"; // Set your desired password
+    const userInput = document.getElementById('lockerInput').value.trim();
+    const message = document.getElementById('lockerMessage');
+    const videoContainer = document.getElementById('videoContainer');
+
+    if (userInput === correctPassword) {
+      videoContainer.style.display = "block";
+      message.textContent = "🎉 Unlocked! Enjoy your special video!";
+      message.style.color = "green";
+    } else {
+      videoContainer.style.display = "none";
+      message.textContent = "❌ Incorrect password. Please try again.";
+      message.style.color = "red";
+    }
+  });
+
+  window.onload = () => {
+    document.getElementById('videoContainer').style.display = 'none';
+  };
+  // Gift box surprise animation logic
+  const giftContainer = document.getElementById('giftContainer');
+  let opened = false;
+
+  giftContainer.addEventListener('click', () => {
+    if (opened) return; // prevent multiple opens
+    opened = true;
+    giftContainer.classList.add('open');
+
+    // Create burst confetti inside gift box
+    for(let i = 0; i < 25; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti-piece');
+      confetti.style.position = 'absolute';
+      confetti.style.left = '50%';
+      confetti.style.top = '50%';
+      confetti.style.width = (6 + Math.random() * 6) + 'px';
+      confetti.style.height = (10 + Math.random() * 10) + 'px';
+      confetti.style.backgroundColor = ['#ff6f91', '#fdd835', '#64b5f6', '#ba68c8'][Math.floor(Math.random() * 4)];
+      confetti.style.borderRadius = '2px';
+      confetti.style.opacity = 0.9;
+      confetti.style.transform = `translate(-50%, -50%) rotate(${Math.random()*360}deg)`;
+      confetti.style.zIndex = '1100';
+      giftContainer.appendChild(confetti);
+
+      // Animate burst confetti outward
+      const angle = Math.random() * 2 * Math.PI;
+      const dist = 100 + Math.random() * 120;
+      confetti.animate([
+        { transform: `translate(-50%, -50%) translate(0, 0) rotate(0deg)`, opacity: 1 },
+        { transform: `translate(-50%, -50%) translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px) rotate(360deg)`, opacity: 0 }
+      ], {
+        duration: 1500 + Math.random() * 500,
+        easing: 'cubic-bezier(0.5, 0, 0.5, 1)'
+      });
+
+      setTimeout(() => confetti.remove(), 2000);
+    }
+
+    // After animation show alert surprise message
+    setTimeout(() => {
+      alert("Surprise! You are deeply loved! 🎉🎂💖");
+    }, 1600);
+  });
+
+  // Allow keyboard accessibility for gift box
+  giftContainer.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      giftContainer.click();
+    }
+  });
+
+  // Click Me button triggers gift box click
+  const clickMeBtn = document.getElementById('clickMeBtn');
+  clickMeBtn.addEventListener('click', () => {
+    giftContainer.focus();
+    giftContainer.click();
+  });
+  </script>
+</body>
+</html>
